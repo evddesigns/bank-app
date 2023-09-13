@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Account Management</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  
+</head>
+<body>
+
+
+  <h1>Bank Account Management</h1>
+  <div id="output"></div>
+  <input type="text" id="accountHolderName" placeholder="Account Holder Name">
+  <input type="text" id="accountType" placeholder="Account Type">
+  <input type="number" id="amount" placeholder="Amount">
+  <button onclick="deposit()">Deposit</button>
+  <button onclick="withdraw()">Withdraw</button>
+  <button onclick="checkBalance()">Check Balance</button>
+ 
+
+  <script>
+    const output = document.getElementById("output");
+    let account;
+
+    function createAccount() {
+      const accountHolderName = document.getElementById("accountHolderName").value;
+      const accountType = document.getElementById("accountType").value;
+      account = new BankAccount(accountHolderName, accountType);
+      output.innerHTML = `Account created for ${accountHolderName} (${accountType})`;
+    }
+
+    function deposit() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      if (account) {
+        const result = account.deposit(amount);
+        output.innerHTML = result;
+      } else {
+        output.innerHTML = "Create an account first.";
+      }
+    }
+
+    function withdraw() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      if (account) {
+        const result = account.withdraw(amount);
+        output.innerHTML = result;
+      } else {
+        output.innerHTML = "Create an account first.";
+      }
+    }
+
+    function checkBalance() {
+      if (account) {
+        const result = account.checkBalance();
+        output.innerHTML = result;
+      } else {
+        output.innerHTML = "Create an account first.";
+      }
+    }
+  </script>
+</body>
+</html>
